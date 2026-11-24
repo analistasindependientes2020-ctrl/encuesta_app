@@ -27,7 +27,7 @@ export default {
     try {
       // 4. Procesamos el formulario
       const GOOGLE_URL = env.GOOGLE_URL;
-      const SECRET_TOKEN = env.SECRET_TOKEN;
+      const SECRET_TOKEN = env.SECRET_TOKEN || "cardenal_amarillo"; // Si Cloudflare no lo lee, usa este por defecto
 
       if (!GOOGLE_URL || !SECRET_TOKEN) {
         throw new Error("Faltan las variables de entorno secretas en Cloudflare.");
