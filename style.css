@@ -1,0 +1,311 @@
+:root {
+    /* Paleta Psicológicamente Amigable */
+    --bg-color: #f6f9f8; /* Blanco con un suspiro de verde/azul (Calma) */
+    --text-color: #2c3e50; /* Azul muy oscuro grisáceo (Lectura fácil, no cansa la vista) */
+    --primary-color: #0f766e; /* Verde azulado profundo (Confianza, crecimiento, neutralidad) */
+    --primary-hover: #115e59; 
+    --accent-color: #d97706; /* Naranja ocre suave para pequeños detalles (Calidez) */
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --green: #10b981;
+    --red: #ef4444;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+body { 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    line-height: 1.6; 
+}
+
+.shell { 
+    width: 100%; 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+/* HEADER */
+.topbar { 
+    background-color: white; 
+    padding: 15px 0; 
+    border-bottom: 2px solid var(--border-color); 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.topbar-inner { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.brand { 
+    color: var(--text-color); 
+    text-decoration: none; 
+    font-weight: 800; 
+    font-size: 1.2rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+.brand-blue { 
+    color: var(--primary-color); 
+}
+
+.logo-icon { 
+    background-color: var(--primary-color); 
+    color: white; 
+    padding: 4px 8px; 
+    border-radius: 6px; 
+    font-size: 1rem; 
+}
+
+.location { 
+    font-size: 0.9rem; 
+    color: #64748b; 
+    font-weight: 600; 
+}
+
+/* TÍTULO DENTRO DE LA TARJETA */
+.survey-title-area { 
+    margin-bottom: 30px; 
+    text-align: center; 
+    border-bottom: 1px solid #f1f5f9; 
+    padding-bottom: 20px; 
+}
+
+.survey-title-area .eyebrow { 
+    font-size: 0.85rem; 
+    font-weight: 800; 
+    letter-spacing: 1.5px; 
+    color: var(--accent-color); /* Toque de calidez */
+    margin-bottom: 8px; 
+}
+
+.survey-title-area h1 { 
+    font-size: 2.2rem; 
+    line-height: 1.2; 
+    font-weight: 800; 
+    color: var(--text-color); 
+}
+
+/* TARJETA */
+.survey-container { 
+    background: var(--card-bg); 
+    padding: 40px; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(15, 118, 110, 0.05); /* Sombra suave con tinte verde */
+    border: 1px solid #f1f5f9; 
+    margin-bottom: 20px; 
+}
+
+h2 { 
+    font-size: 1.4rem; 
+    color: var(--text-color); 
+    margin-bottom: 20px; 
+    font-weight: 700; 
+}
+
+/* FORMULARIOS */
+.form-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    margin-bottom: 20px; 
+}
+
+label { 
+    font-weight: 600; 
+    color: var(--text-color); 
+    font-size: 0.95rem; 
+}
+
+input[type="text"], input[type="number"], select, textarea { 
+    width: 100%; 
+    padding: 12px 16px; 
+    border: 1.5px solid var(--border-color); 
+    border-radius: 10px; 
+    font-size: 1rem; 
+    background-color: #fafafa;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus { 
+    outline: none; 
+    border-color: var(--primary-color); 
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.1); 
+}
+
+/* HONEYPOT */
+.hp-field { 
+    position: absolute; 
+    left: -9999px; 
+    opacity: 0; 
+}
+
+/* MATRIZ */
+.matrix-table { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+    margin-bottom: 25px; 
+}
+
+.matrix-row { 
+    display: flex; 
+    align-items: center; 
+    padding: 14px 12px; 
+    border-bottom: 1px solid #f1f5f9; 
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.matrix-row:hover {
+    background-color: #f8fafc;
+}
+
+.matrix-row.header-row { 
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    color: #64748b; 
+    border-bottom: 2px solid var(--border-color); 
+    padding-bottom: 8px;
+}
+
+.matrix-label { 
+    flex: 1; 
+    font-weight: 500; 
+    font-size: 0.95rem; 
+}
+
+.matrix-options { 
+    display: flex; 
+    gap: 15px; 
+    justify-content: space-around; 
+    width: 280px; 
+}
+
+.matrix-options input[type="radio"] { 
+    width: 22px; 
+    height: 22px; 
+    accent-color: var(--primary-color); 
+    cursor: pointer; 
+}
+
+/* BOTONES */
+.nav-buttons { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 35px; 
+}
+
+button { 
+    padding: 14px 28px; 
+    border: none; 
+    border-radius: 10px; 
+    font-size: 1rem; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+}
+
+.btn-next, .btn-submit { 
+    background-color: var(--primary-color); 
+    color: white; 
+    box-shadow: 0 4px 6px rgba(15, 118, 110, 0.2);
+}
+
+.btn-next:hover, .btn-submit:hover { 
+    background-color: var(--primary-hover); 
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px rgba(15, 118, 110, 0.25);
+}
+
+.btn-prev { 
+    background-color: transparent; 
+    color: #64748b; 
+    border: 1.5px solid var(--border-color); 
+}
+
+.btn-prev:hover { 
+    background-color: #f1f5f9; 
+    color: var(--text-color);
+}
+
+button:disabled { 
+    background-color: #cbd5e1; 
+    color: #94a3b8;
+    cursor: not-allowed; 
+    box-shadow: none;
+}
+
+/* FOOTER */
+.footer { 
+    text-align: center; 
+    font-size: 0.85rem; 
+    color: #94a3b8; 
+    padding: 20px 0 40px 0; 
+}
+
+/* MENSAJE DE ÉXITO */
+.success-message { 
+    text-align: center; 
+    padding: 20px; 
+}
+
+.success-message h2 { 
+    font-size: 2rem; 
+    color: var(--primary-color); 
+    margin-bottom: 10px; 
+}
+
+.success-message p { 
+    font-size: 1.1rem; 
+    color: #64748b; 
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .survey-title-area h1 { font-size: 1.8rem; }
+    .survey-container { padding: 25px 20px; }
+    
+    .matrix-row { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 12px; 
+        padding: 15px 0;
+    }
+    
+    .matrix-options { 
+        width: 100%; 
+        justify-content: space-between; 
+        padding: 0 10px;
+    }
+    
+    .matrix-row.header-row { 
+        display: none; 
+    }
+    
+    .topbar-inner { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 8px; 
+    }
+
+    .nav-buttons {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .btn-next, .btn-submit, .btn-prev {
+        width: 100%;
+    }
+}
