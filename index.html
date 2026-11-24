@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Villa Mercedes - Analistas Independientes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app" data-mode="open" data-submitted="false">
+        <!-- HEADER ACTUALIZADO -->
+        <header class="topbar">
+            <div class="shell topbar-inner">
+                <a class="brand" href="#inicio">
+                    <div class="logo-icon">📊</div> Analistas <span class="brand-blue">Independientes</span>
+                </a>
+                <span class="location">Toma de muestra: Villa Mercedes, San Luis</span>
+            </div>
+        </header>
+
+        <main id="inicio" class="shell" style="padding-top: 40px;">
+            
+            <div class="survey-container">
+                <!-- TÍTULO DENTRO DE LA TARJETA -->
+                <div class="survey-title-area">
+                    <p class="eyebrow">ENCUESTA DE OPINIÓN</p>
+                    <h1>Tu opinión sobre Villa Mercedes</h1>
+                </div>
+
+                <form id="surveyForm" novalidate>
+                    <!-- TRAMPA PARA BOTS -->
+                    <div class="hp-field" aria-hidden="true">
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <!-- PASO 1: EDAD Y BARRIO -->
+                    <div class="form-step active" id="step-1">
+                        <h2>¡Hola! Empecemos por lo básico</h2>
+                        
+                        <div class="form-group">
+                            <label for="anio_nacimiento">¿En qué año naciste?</label>
+                            <input type="number" id="anio_nacimiento" name="anio_nacimiento" placeholder="Ej: 1995" min="1900" max="2015" required>
+                            <small style="color: #666; font-size: 0.8rem;">Aclaración: Para participar debes haber nacido en 2010 o antes.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="barrio">¿En qué barrio de Villa Mercedes vivís?</label>
+                            <input type="text" id="barrio" name="barrio" placeholder="Ej: Centro, San Martín..." required>
+                        </div>
+
+                        <div class="nav-buttons">
+                            <button type="button" class="btn-next" id="btnContinuar" onclick="nextStep(2)">Continuar →</button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2: EVALUACIÓN -->
+                    <div class="form-step" id="step-2" style="display: none;">
+                        <h2>¿Cómo evaluás estos aspectos de tu ciudad?</h2>
+                        <div class="matrix-table">
+                            <div class="matrix-row header-row">
+                                <div class="matrix-label"></div>
+                                <div class="matrix-options">
+                                    <span>Bien</span><span>Regular</span><span>Mal</span><span>No sé</span>
+                                </div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-label">Calles y veredas</div>
+                                <div class="matrix-options">
+                                    <label><input type="radio" name="q_calles" value="Bien" required></label>
+                                    <label><input type="radio" name="q_calles" value="Regular"></label>
+                                    <label><input type="radio" name="q_calles" value="Mal"></label>
+                                    <label><input type="radio" name="q_calles" value="No sé"></label>
+                                </div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-label">Alumbrado público</div>
+                                <div class="matrix-options">
+                                    <label><input type="radio" name="q_alumbrado" value="Bien" required></label>
+                                    <label><input type="radio" name="q_alumbrado" value="Regular"></label>
+                                    <label><input type="radio" name="q_alumbrado" value="Mal"></label>
+                                    <label><input type="radio" name="q_alumbrado" value="No sé"></label>
+                                </div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-label">Limpieza y recolección</div>
+                                <div class="matrix-options">
+                                    <label><input type="radio" name="q_limpieza" value="Bien" required></label>
+                                    <label><input type="radio" name="q_limpieza" value="Regular"></label>
+                                    <label><input type="radio" name="q_limpieza" value="Mal"></label>
+                                    <label><input type="radio" name="q_limpieza" value="No sé"></label>
+                                </div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-label">Seguridad</div>
+                                <div class="matrix-options">
+                                    <label><input type="radio" name="q_seguridad" value="Bien" required></label>
+                                    <label><input type="radio" name="q_seguridad" value="Regular"></label>
+                                    <label><input type="radio" name="q_seguridad" value="Mal"></label>
+                                    <label><input type="radio" name="q_seguridad" value="No sé"></label>
+                                </div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-label">Transporte público</div>
+                                <div class="matrix-options">
+                                    <label><input type="radio" name="q_transporte" value="Bien" required></label>
+                                    <label><input type="radio" name="q_transporte" value="Regular"></label>
+                                    <label><input type="radio" name="q_transporte" value="Mal"></label>
+                                    <label><input type="radio" name="q_transporte" value="No sé"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-buttons">
+                            <button type="button" class="btn-prev" onclick="prevStep(1)">← Volver</button>
+                            <button type="button" class="btn-next" onclick="nextStep(3)">Continuar →</button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3: GOBERNADOR, INTENDENCIA, PRIORIDADES Y COMENTARIOS -->
+                    <div class="form-step" id="step-3" style="display: none;">
+                        <h2>Intención de voto y prioridades</h2>
+                        
+                        <!-- Gobernador -->
+                        <div class="form-group">
+                            <label for="gobernador">Si las elecciones fueran hoy, ¿a quién votarías para Gobernador de San Luis?</label>
+                            <select id="gobernador" name="gobernador" required>
+                                <option value="">Seleccioná una opción</option>
+                                <option value="Claudio Poggi">Claudio Poggi</option>
+                                <option value="Alberto Rodríguez Saá">Alberto Rodríguez Saá</option>
+                                <option value="Adolfo Rodríguez Saá">Adolfo Rodríguez Saá</option>
+                                <option value="Bartolomé «Bartolo» Abdala">Bartolomé «Bartolo» Abdala</option>
+                                <option value="Karina Fabi">Karina Fabi</option>
+                                <option value="Fernando Pastor">Fernando Pastor</option>
+                                <option value="Todavía no decidí">Todavía no decidí</option>
+                            </select>
+                        </div>
+
+                        <!-- Intendencia -->
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="intendencia">Si las elecciones fueran hoy, ¿a quién votarías para Intendente de Villa Mercedes?</label>
+                            <select id="intendencia" name="intendencia" required>
+                                <option value="">Seleccioná una opción</option>
+                                <option value="Luis Giraudo">Luis Giraudo</option>
+                                <option value="Nicolás González Ferro">Nicolás González Ferro</option>
+                                <option value="Leandro Degan">Leandro Degan</option>
+                                <option value="Douglas Cristhian Cadelago">Douglas Cristhian Cadelago</option>
+                                <option value="Rudy Cámera">Rudy Cámera</option>
+                                <option value="Mario Raúl Merlo">Mario Raúl Merlo</option>
+                                <option value="Mónica Becerra">Mónica Becerra</option>
+                                <option value="Fernando Pastor">Fernando Pastor</option>
+                                <option value="Todavía no decidí">Todavía no decidí</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label>¿Qué problemas deberían atenderse primero? (Elegí el más urgente)</label>
+                            <select name="problema_urgente" required>
+                                <option value="">Seleccioná una opción...</option>
+                                <option value="calles">Calles y bacheo</option>
+                                <option value="seguridad">Seguridad</option>
+                                <option value="limpieza">Limpieza y residuos</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="tramites">Trámites municipales</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="comentarios">Comentarios adicionales (Opcional)</label>
+                            <textarea id="comentarios" name="comentarios" rows="3" placeholder="Escribe aquí..."></textarea>
+                        </div>
+
+                        <div class="nav-buttons">
+                            <button type="button" class="btn-prev" onclick="prevStep(2)">← Volver</button>
+                            <button type="submit" class="btn-submit" id="submitBtn">Enviar Encuesta 🚀</button>
+                        </div>
+                    </div>
+
+                    <!-- MENSAJE DE ÉXITO -->
+                    <div class="success-message" id="successMessage" style="display: none;">
+                        <h2>Gracias por participar</h2>
+                        <p>Recibimos tus respuestas. Se admite una respuesta por navegador.</p>
+                    </div>
+                </form>
+            </div>
+
+            <footer class="footer">
+                <p>Estudio impulsado por analistas independientes. Sin fines partidarios.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
