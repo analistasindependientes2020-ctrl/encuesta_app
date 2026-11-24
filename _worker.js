@@ -1,8 +1,14 @@
 export default {
   async fetch(request, env) {
-    // 1. Manejo de CORS
     const allowedOrigin = "https://encuesta-app.analistasindependientes2020.workers.dev"; 
 
+    // 1. SI ES UN GET, DEJAMOS PASAR LA PÁGINA WEB (index.html, css, etc)
+    if (request.method === "GET") {
+      // Le pedimos a Cloudflare que sirva el archivo estático correspondiente
+      return env.ASSETS.fetch(request); 
+    }
+
+    // 2. Manejo de CORS para el formulario
     if (request.method === "OPTIONS") {
       return new Response(null, {
         headers: {
@@ -13,12 +19,13 @@ export default {
       });
     }
 
+    // 3. Si no es POST (y no es GET), lo bloqueamos
     if (request.method !== "POST") {
       return new Response("Método no permitido", { status: 405 });
     }
 
     try {
-      // 2. Leemos los secretos de Cloudflare
+      // 4. Procesamos el formulario
       const GOOGLE_URL = env.GOOGLE_URL;
       const SECRET_TOKEN = env.SECRET_TOKEN;
 
@@ -26,11 +33,9 @@ export default {
         throw new Error("Faltan las variables de entorno secretas en Cloudflare.");
       }
 
-      // 3. Preparamos los datos
       const formData = await request.formData();
       formData.append("token", SECRET_TOKEN);
 
-      // 4. Reenviamos a Google
       const googleResponse = await fetch(GOOGLE_URL, {
         method: "POST",
         body: formData,
