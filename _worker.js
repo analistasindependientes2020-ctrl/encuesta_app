@@ -2,13 +2,16 @@ export default {
   async fetch(request, env) {
     const allowedOrigin = "https://encuesta-app.analistasindependientes2020.workers.dev"; 
 
-    // 1. SI ES UN GET, DEJAMOS PASAR LA PÁGINA WEB (index.html, css, etc)
+    // 1. SI ES UN GET, DEVOLVEMOS EL HTML (Usando el CDN de GitHub o un fetch)
     if (request.method === "GET") {
-      // Le pedimos a Cloudflare que sirva el archivo estático correspondiente
-      return env.ASSETS.fetch(request); 
+      // Si estás usando el dominio de workers.dev, puedes hacer un fetch a tu GitHub Pages
+      // O simplemente devolver un texto para probar:
+      return new Response("El servidor está funcionando. Por favor, usá el formulario.", { 
+        headers: { "Content-Type": "text/html;charset=UTF-8" }
+      });
     }
 
-    // 2. Manejo de CORS para el formulario
+    // 2. Manejo de CORS
     if (request.method === "OPTIONS") {
       return new Response(null, {
         headers: {
@@ -19,19 +22,10 @@ export default {
       });
     }
 
-    // 3. Si no es POST (y no es GET), lo bloqueamos
-    if (request.method !== "POST") {
-      return new Response("Método no permitido", { status: 405 });
-    }
-
+    // 3. Procesar POST
     try {
-      // 4. Procesamos el formulario
-      const GOOGLE_URL = env.GOOGLE_URL;
-      const SECRET_TOKEN = env.SECRET_TOKEN || "cardenal_amarillo"; // Si Cloudflare no lo lee, usa este por defecto
-
-      if (!GOOGLE_URL || !SECRET_TOKEN) {
-        throw new Error("Faltan las variables de entorno secretas en Cloudflare.");
-      }
+      const GOOGLE_URL = "https://script.google.com/macros/s/AKfycbx_WOjsKJNIu_PvuoJF2hoR7a9gMx8PwGeKuUFApyeA-kXnERHwVPRv7_I7PyWqiRtXcA/exec"; 
+      const SECRET_TOKEN = "cardenal_amarillo"; 
 
       const formData = await request.formData();
       formData.append("token", SECRET_TOKEN);
@@ -49,7 +43,6 @@ export default {
           "Access-Control-Allow-Origin": allowedOrigin,
         },
       });
-
     } catch (error) {
       return new Response(JSON.stringify({ result: "error", message: error.message }), {
         status: 500,
